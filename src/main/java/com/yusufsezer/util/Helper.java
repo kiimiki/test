@@ -16,10 +16,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Helper {
+ for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+test-1-tomcat-1  | Dec 17, 2023 10:58:18 PM org.apache.catalina.startup.HostConfig deployWAR
+test-1-tomcat-1  | INFO: Deployment of web application archive [/usr/local/tomcat/webapps/ROOT.war] has finished in [1,088] ms
+test-1-tomcat-1  | Dec 17, 2023 10:58:18 PM org.apache.coyote.AbstractProtocol start
+test-1-tomcat-1  | INFO: Starting ProtocolHandler ["http-apr-8080"]
+test-1-tomcat-1  | Dec 17, 2023 10:58:18 PM org.apache.catalina.startup.Catalina start
+test-1-tomcat-1  | INFO: Server startup in 1204 ms
+
 
     public static String VIEW_FOLDER = "WEB-INF/view";
     public static String NOT_FOUND = "notfound.jsp";
-    public static String DB_SOURCE = "jdbc:mysql://192.168.88.153:3306/jspDiary?useSSL=false&serverTimezone=UTC&user=test_user&password=test_password&charset=UTF-8";
+    public static String DB_SOURCE = "jdbc:mysql://mysql:3306/jspDiary?useSSL=false&serverTimezone=UTC&user=root&password=root_password&charset=UTF-8";
     private static IDatabase DATABASE = null;
 
     public static void view(HttpServletRequest request, HttpServletResponse response)
