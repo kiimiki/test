@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Helper {
- for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+
 test-1-tomcat-1  | Dec 17, 2023 10:58:18 PM org.apache.catalina.startup.HostConfig deployWAR
 test-1-tomcat-1  | INFO: Deployment of web application archive [/usr/local/tomcat/webapps/ROOT.war] has finished in [1,088] ms
 test-1-tomcat-1  | Dec 17, 2023 10:58:18 PM org.apache.coyote.AbstractProtocol start
