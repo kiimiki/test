@@ -5,15 +5,11 @@ import com.yusufsezer.model.User;
 import com.yusufsezer.repository.DiaryRepository;
 import com.yusufsezer.repository.MySQL;
 import com.yusufsezer.repository.UserRepository;
-
 import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +19,8 @@ public class Helper {
 
     public static String VIEW_FOLDER = "WEB-INF/view";
     public static String NOT_FOUND = "notfound.jsp";
-    public static String DB_SOURCE = "jdbc:mysql://mysql:3306/jspDiary?useSSL=false&serverTimezone=UTC&user=root&password=root_password&charset=UTF-8";
+    public static String DB_SOURCE = "jdbc:mysql://mysql:3306/jspDiary?useSSL=false&serverTimezone=UTC&user=test_user&password=test_password&charset=UTF-8";
     private static IDatabase DATABASE = null;
-
-    private static final Logger LOGGER = Logger.getLogger(Helper.class.getName());
 
     public static void view(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,7 +71,6 @@ public class Helper {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.log(Level.SEVERE, "Алгоритм MD5 не найден", e);
             return text;
         }
     }
