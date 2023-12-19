@@ -1,7 +1,7 @@
-# Используем базовый образ с Maven и Java
+# Use base build Maven и Java
 FROM maven:3.8.4-jdk-11-slim
 
-# Устанавливаем Git
+# Install Git
 RUN apt-get update && apt-get install -y git
 
 # Copy SSH key to the container
@@ -12,14 +12,14 @@ RUN chmod 600 /root/.ssh/id_rsa
 RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-# Устанавливаем рабочую директорию
+# Use working dir
 WORKDIR /app
 
 # Clone the Git repository
 RUN git clone  git@github.com:kiimiki/test.git .
 
-# Запускаем команду mvn tomcat7:run
+# Run app with command mvn tomcat7:run
 CMD ["mvn", "tomcat7:run"]
 
-# Экспонируем порт 8080
+# Expose port 8080
 EXPOSE 8080
