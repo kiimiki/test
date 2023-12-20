@@ -1,16 +1,17 @@
-version: '3'
+version: '3.7'
 
 services:
   tomcat:
     image: "jsp-app-1-2:latest"
     ports:
-      - "8080:80"
+      - "5000:8080"
     environment:
       MYSQL_HOST: mysql
     deploy:
-      # replicas: 1
-    depends_on:
-      - mysql
+      replicas: 1
+      depends_on:
+        mysql:
+          condition: service_healthy
     networks:
       - net-1
 
@@ -19,8 +20,8 @@ services:
     ports:
       - '3306:33060'
     volumes:
-      - /opt/docker/test-1/mysql-data:/var/lib/mysql
-      - /opt/docker/test-1/mysql-data-import:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+      - mysql-data-import:/docker-entrypoint-initdb.d
     command: --init-file /docker-entrypoint-initdb.d/db_table.sql --default-authentication-plugin=caching_sha2_password
     environment:
       MYSQL_ROOT_PASSWORD: root_password
@@ -29,9 +30,37 @@ services:
       MYSQL_PASSWORD: test_password
     networks:
       - net-1
-  
+    deploy:
+      replicas: 1
+
+  nginx:
+    image: "nginx:latest"
+    ports:
+      - "80:80"
+    networks:
+      - net-1
+    deploy:
+      replicas: 1
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8081:80"
+    networks:
+      - net-1
+    deploy:
+      replicas: 1
+      depends_on:
+        mysql:
+          condition: service_healthy
+
 volumes:
   mysql-data:
+  mysql-data-import:
 
 networks:
   net-1:
