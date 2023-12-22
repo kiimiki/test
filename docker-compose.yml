@@ -8,13 +8,13 @@ services:
     environment:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
+    networks:
+      - net-1
     deploy:
       replicas: 1
       depends_on:
         mysql:
           condition: service_healthy
-    networks:
-      - net-1
 
   mysql:
     image: "mysql:8.0"
@@ -33,6 +33,11 @@ services:
       - net-1
     deploy:
       replicas: 1
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "test_user", "-p${MYSQL_PASSWORD}"]
+        interval: 10s
+        timeout: 5s
+        retries: 3
 
   nginx:
     image: "nginx:latest"
